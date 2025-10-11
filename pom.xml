@@ -48,5 +48,29 @@
             <scope>compile</scope>
         </dependency>
 
+<!--         https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine-->
+                <dependency>
+                    <groupId>org.junit.jupiter</groupId>
+                    <artifactId>junit-jupiter-engine</artifactId>
+                    <version>5.13.0</version>
+                    <scope>test</scope>
+                </dependency>
+            <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit-platform-engine -->
+            <dependency>
+                <groupId>io.cucumber</groupId>
+                <artifactId>cucumber-junit-platform-engine</artifactId>
+                <version>7.30.0</version>
+                <scope>test</scope>
+            </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-picocontainer</artifactId>
+            <version>7.23.0</version> <!-- Use the same major version as your cucumber-java/cucumber-junit -->
+            <scope>test</scope>
+        </dependency>
+
+
+
     </dependencies>
 </project>
