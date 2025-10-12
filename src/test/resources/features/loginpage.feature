@@ -7,3 +7,4 @@ Feature: Login page
   Scenario: Login to AutomationExercise Application
     Given I am logged into application with user "Amit"
     Then I should be logged in successfully.
+
