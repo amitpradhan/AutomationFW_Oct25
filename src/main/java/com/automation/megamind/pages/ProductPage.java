@@ -12,7 +12,7 @@ public class ProductPage {
         PageFactory.initElements(driver ,this);
     }
 
-    @FindBy(xpath = "//*[@id='cartModal']/div/div/div[1]/h4")
+    @FindBy(xpath = "//h4[text()='Added!']")
     WebElement productAddText;
 
     public String productAddedSuccessText(){

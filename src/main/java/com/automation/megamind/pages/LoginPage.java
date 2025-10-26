@@ -35,7 +35,7 @@ public class LoginPage { // Removed 'extends Hooks'
     @FindBy(xpath = "//input[@name='password']")
     WebElement password;
 
-    @FindBy(xpath = " //button[text()='Login']")
+    @FindBy(xpath = "//button[text()='Login']")
     WebElement loginBtn;
 
     // Actions

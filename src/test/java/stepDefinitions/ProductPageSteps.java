@@ -27,8 +27,9 @@ public class ProductPageSteps {
 
 
     @Then("the item got added successfully")
-    public void the_item_got_added_successfully() {
-        Assert.assertEquals("Product did not get added successfully.", "Added!", productPage.productAddedSuccessText());
+    public void the_item_got_added_successfully() throws InterruptedException {
+        Thread.sleep(5000);
+          Assert.assertEquals("Product did not get added successfully.", "Added!", productPage.productAddedSuccessText());
 
     }
 }
