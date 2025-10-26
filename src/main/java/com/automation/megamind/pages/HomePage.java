@@ -1,9 +1,15 @@
 package com.automation.megamind.pages;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class HomePage {
     WebDriver driver;
@@ -18,7 +24,7 @@ public class HomePage {
     @FindBy(xpath = "//*[@id='header']/div/div/div/div[2]/div/ul/li[4]/a")
     WebElement logoutText;
 
-    @FindBy(xpath = "/html/body/section[2]/div/div/div[2]/div[1]/div[2]/div/div[2]/ul/li/a")
+    @FindBy(xpath = "/html/body/section[2]/div/div/div[2]/div[1]/div[2]/div/div[2]/ul")
     WebElement viewProductBtn;
 
     @FindBy(xpath = "/html/body/section/div/div/div[2]/div[2]/div[2]/div/span/button")
@@ -33,7 +39,10 @@ public class HomePage {
     }
     //Add first to cart on the default HomePage
     public void addFirstItemToCart(){
-        viewProductBtn.click();
+        WebElement element = driver.findElement(By.xpath("/html/body/section[2]/div/div/div[2]/div/div[2]/div/div[2]/ul/li/a"));
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element);
+
         addToCartProductPage.click();
     }
 
