@@ -1,4 +1,4 @@
 package com.automation.megamind.pages;
 
-public class AddToCartPage {
+public class CartPage {
 }
