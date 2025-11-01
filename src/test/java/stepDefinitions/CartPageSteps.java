@@ -27,11 +27,11 @@ public class CartPageSteps {
 
 
     @Then("check Price and Quantity in Cart page")
-    public void check_price_and_quantity_in_cart_page() {
-        cartPage.gotToCartPage();
+    public void check_price_and_quantity_in_cart_page() throws InterruptedException {
+        cartPage.clickOnViewCart();
         System.out.println("AMIT....");
-        System.out.println(cartPage.getProductPriceBasedOnProductDescription("Men Tshirt"))
-        ;
+        System.out.println(cartPage.getProductPriceBasedOnProductDescription("Blue Top"));
+        Thread.sleep(5000);
     }
 
     @Then("validate the total amount")

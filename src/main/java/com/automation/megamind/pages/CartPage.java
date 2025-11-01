@@ -28,9 +28,9 @@ public class CartPage {
 
     public int getProductPriceBasedOnProductDescription(String productDescription){
         // 1. Construct the full XPath
-       // String fullXPath = cartProductDescription_xpath_start + productDescription + cartProductDescription_xpath_end;
+        String fullXPath = cartProductDescription_xpath_start + productDescription + cartProductDescription_xpath_end;
 
-        String fullXPath = "//table[@id='cart_info_table']/tbody/descendant::a[contains(normalize-space(text()),'Men Tshirt')]/ancestor::td/following-sibling::td[@class='cart_price']/p";
+
         // 2. Initialize WebDriverWait
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(TIMEOUT_SECONDS));
 
@@ -44,6 +44,7 @@ public class CartPage {
 
         // Assuming price format is "Rs. 400"
         // rs. 400
+        System.out.println("AMIT    ->"+price);
 
         // 5. Extract the integer price value
         // Use trim() for robustness in case of extra spaces
@@ -53,7 +54,18 @@ public class CartPage {
     @FindBy(xpath = "//*[@id='header']/div/div/div/div[2]/div/ul/li[3]/a")
     WebElement cartMenuLink;
 
-    public void gotToCartPage(){
+    @FindBy(xpath = "//*[@id='cartModal']/div/div/div[2]/p[2]/a/u")
+    WebElement viewCartLink;
+
+    //*[@id='cartModal']/div/div/div[2]/p[2]/a/u
+
+    public void clickOnViewCart() {
+
+        viewCartLink.click();
+    }
+
+    public void gotToCartPage() throws InterruptedException {
+        Thread.sleep(5000);
         cartMenuLink.click();
     }
-}
+    }
