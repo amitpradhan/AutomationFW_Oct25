@@ -6,12 +6,17 @@ import com.automation.megamind.pages.HomePage;
 import com.automation.megamind.pages.LoginPage;
 import com.automation.megamind.pages.ProductPage;
 import io.cucumber.java.en.Then;
+import org.junit.Assert;
 
 public class CartPageSteps {
 
     private HomePage homePage;
     private ProductPage productPage;
     private CartPage cartPage;
+
+    public int price ;
+    public int quantity;
+    public int total;
 
     /**
      * Constructor Injection: Cucumber automatically instantiates this class once per scenario
@@ -26,17 +31,22 @@ public class CartPageSteps {
     }
 
 
-    @Then("check Price and Quantity in Cart page")
-    public void check_price_and_quantity_in_cart_page() throws InterruptedException {
+    @Then("check Price and Quantity in Cart page for {string}")
+    public void check_price_and_quantity_in_cart_page(String productDescription) throws InterruptedException {
         cartPage.clickOnViewCart();
-        System.out.println("AMIT....");
-        System.out.println(cartPage.getProductPriceBasedOnProductDescription("Blue Top"));
-        Thread.sleep(5000);
+        price = cartPage.getProductPriceBasedOnProductDescription(productDescription);
+        quantity = cartPage.getProductQuantityBasedOnProductDescription(productDescription);
+        total = cartPage.getCartTotal(productDescription);
+
+        System.out.println("Product Price: "+price);
+        System.out.println("No of Product added in the cart: "+quantity);
+        System.out.println("Total Price: "+total);
+
     }
 
     @Then("validate the total amount")
     public void validate_the_total_amount() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        int totalPrice = price * quantity;
+        Assert.assertEquals("Total price doesn't match",totalPrice , total );
     }
 }

@@ -7,5 +7,5 @@ Feature: Cart page
   Scenario: Verify Total amount should match quantity multiply by price
     Given I am logged into application with user "Amit"
     Then I add first item to the cart
-    Then check Price and Quantity in Cart page
+    Then check Price and Quantity in Cart page for "Blue Top"
     Then validate the total amount
