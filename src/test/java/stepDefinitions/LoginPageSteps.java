@@ -3,6 +3,7 @@ package stepDefinitions;
 import com.automation.megamind.base.WebDriverContext; // <-- Import the shared context object
 import com.automation.megamind.pages.HomePage;
 import com.automation.megamind.pages.LoginPage;
+import com.automation.megamind.utils.Log;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
@@ -30,6 +31,8 @@ public class LoginPageSteps { // Removed 'extends Hooks'
 
     @Given("I am logged into application with user {string}")
     public void i_am_logged_into_application_with_user(String user) {
+        Log.startTestCase("Login Feature Test");
+
         // Page Objects are guaranteed to be initialized here.
         loginPage.login(user);
 

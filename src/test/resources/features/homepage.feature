@@ -1,4 +1,4 @@
-@login_page
+@smoke
 Feature: Home page
   This file contains all the testcases related to home page
 
@@ -8,5 +8,12 @@ Feature: Home page
     Given I am logged into application with user "Amit"
     Then I add first item to the cart
     And the item got added successfully
+
+  @loginAsUser_fail @smoke
+  Scenario: Add to cart - first item - failed login
+    Given I am logged into application with user "Amit1"
+    Then I add first item to the cart
+    And the item got added successfully
+
 
 

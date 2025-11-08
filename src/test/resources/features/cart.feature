@@ -1,4 +1,4 @@
-@cart_page
+@cart_page @smoke
 Feature: Cart page
   This file contains all the testcases related to Cart page
 
