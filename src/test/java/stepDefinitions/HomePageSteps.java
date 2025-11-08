@@ -3,6 +3,7 @@ package stepDefinitions;
 import com.automation.megamind.base.WebDriverContext;
 import com.automation.megamind.pages.HomePage;
 import com.automation.megamind.pages.LoginPage;
+import com.automation.megamind.utils.Log;
 import io.cucumber.java.PendingException;
 import io.cucumber.java.en.Then;
 
@@ -23,6 +24,7 @@ public class HomePageSteps {
 
     @Then("I add first item to the cart")
     public void i_add_first_item_to_the_cart() {
+        Log.info("Adding first item to the cart.");
         homePage.addFirstItemToCart();
     }
 
