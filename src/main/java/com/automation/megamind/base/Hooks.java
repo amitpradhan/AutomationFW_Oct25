@@ -162,7 +162,9 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 
 import java.time.Duration;
 
@@ -187,6 +189,34 @@ public class Hooks {
     /**
      * @Before hook: Runs before every scenario. Initializes the WebDriver.
      */
+//    @Before(order = 1)
+//    public void launchApp(){
+//        String browserType = getProperty(CONFIG_PROPERTIES, "browserType");
+//        String url = getProperty(CONFIG_PROPERTIES, "url");
+//        long timeout = Long.parseLong(getProperty(CONFIG_PROPERTIES, "timeout"));
+//
+//        WebDriver driver;
+//
+//        if(browserType.equalsIgnoreCase("chrome")){
+//            // Relying on Selenium Manager (preferred for modern Selenium)
+//            driver = new ChromeDriver();
+//        } else if (browserType.equalsIgnoreCase("edge")) {
+//            driver = new EdgeDriver();
+//        } else {
+//            // Log error with SLF4J if available, otherwise use System.err
+//            Log.error("Unsupported browser type: " + browserType + ". Defaulting to Chrome.");
+//            driver = new ChromeDriver();
+//        }
+//
+//        // Assign the initialized driver to the shared context
+//        this.context.driver = driver;
+//
+//        this.context.driver.manage().window().maximize();
+//        this.context.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(timeout));
+//        this.context.driver.get(url);
+//    }
+
+
     @Before(order = 1)
     public void launchApp(){
         String browserType = getProperty(CONFIG_PROPERTIES, "browserType");
@@ -195,24 +225,44 @@ public class Hooks {
 
         WebDriver driver;
 
+        // ----------------------------------------
+        // HEADLESS MODE FOR CHROME & EDGE
+        // ----------------------------------------
+
         if(browserType.equalsIgnoreCase("chrome")){
-            // Relying on Selenium Manager (preferred for modern Selenium)
-            driver = new ChromeDriver();
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--headless=new");    // HEADLESS MODE
+            options.addArguments("--window-size=1920,1080");
+            options.addArguments("--disable-gpu");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+
+            driver = new ChromeDriver(options);
+
         } else if (browserType.equalsIgnoreCase("edge")) {
-            driver = new EdgeDriver();
+            EdgeOptions options = new EdgeOptions();
+            options.addArguments("--headless=new");    // HEADLESS MODE
+            options.addArguments("--window-size=1920,1080");
+
+            driver = new EdgeDriver(options);
+
         } else {
-            // Log error with SLF4J if available, otherwise use System.err
             Log.error("Unsupported browser type: " + browserType + ". Defaulting to Chrome.");
-            driver = new ChromeDriver();
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--headless=new");
+            options.addArguments("--window-size=1920,1080");
+
+            driver = new ChromeDriver(options);
         }
 
-        // Assign the initialized driver to the shared context
+        // Assign the driver to PicoContainer context
         this.context.driver = driver;
 
-        this.context.driver.manage().window().maximize();
-        this.context.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(timeout));
-        this.context.driver.get(url);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(timeout));
+        driver.get(url);
     }
+
+
 
     /**
      * @After hook: Runs after every scenario. Closes the browser and takes a screenshot on failure.
